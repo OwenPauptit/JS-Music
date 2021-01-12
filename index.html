@@ -1,0 +1,153 @@
+
+<button onclick="startPlaying()">Start</button>
+
+<canvas id="canvas" width="600" height="400"></canvas>
+
+<script src="music.js"></script>
+<script src="vector.js"></script>
+<script src="vehicle.js"></script>
+<script src="ball.js"></script>
+<script src="line.js"></script>
+
+<script>
+
+    const context = new AudioContext();
+    //const notes = ["C4", "E3", "A4"]//["E5", "D#5", "E5", "D#5", "E5", "B4", "D5", "C5", "A4"]
+    //const notes = ["G#3", "C#4", "E3", "G#3", "C#4", "E3", "G#3", "C#4", "E3", "G#3", "C#4", "E3", "G#3", "C#4", "E3", "G#3", "C#4", "E3", "A3", "C#4", "E3", "A3", "C#4", "E3", "A3", "D3", "F#3", "A3", "D3", "F#3"]
+    //const notes = ['A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'G4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'A#4', 'A4', 'G4', 'A#4', 'A#4', 'A#4', 'A4', 'A4', 'A4', 'G4', 'A#4', 'A#4', 'A#4', 'A4', 'A4', 'A4', 'G4', 'G4', 'G4', 'G4', 'A4', 'A4', 'A4', 'A4', 'A#4', 'A#4', 'A#4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'A#4', 'A4', 'G4', 'D4', 'C5', 'A#4', 'A4', 'A#4'];
+        const notes = ['A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'G3', 'A#3', 'A#3', 'A#3', 'A3', 'A3', 'A3', 'G3', 'A#3', 'A#3', 'A#3', 'A3', 'A3', 'A3', 'G3', 'G3', 'G3', 'G3', 'A3', 'A3', 'A3', 'A3', 'A#3', 'A#3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3'];
+    
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const decayRate = Math.PI/8; // seconds
+
+    let playing = false;
+
+    index = 0;
+    //let vehicles = [];
+    let t;
+    let line;
+    let balls = [];
+
+    window.onload = function()
+    {
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext("2d");
+
+        //vehicles.push(new Vehicle(200,300,0));
+        //vehicles.push(new Vehicle(200,205,1));
+        //vehicles.push(new Vehicle(200,250,0));
+        t = new Vector(200,200); 
+        balls.push(new Ball(200,200,100,theta=0,vdir=-1));
+        balls.push(new Ball(200,200,100,theta=Math.PI,vdir=-1));
+        balls.push(new Ball(400,200,100,theta=0.01+Math.PI/2,vdir=1));
+        balls.push(new Ball(400,200,100,theta=0.01+3*Math.PI/2,vdir=1));
+
+        line = new Line(300,200,440);
+
+
+        var loop = setInterval(gameLoop, 1000/40);
+    }
+
+    gameLoop = function()
+    {
+        draw();
+        line.Draw(ctx);
+        for (var i = 0; i < balls.length; i++)
+        {
+            balls[i].Update();
+            balls[i].Draw(ctx);
+
+            if (playing)
+            {
+                if (balls[i].pos.y < 205 && balls[i].pos.y > 195 && balls[i].halfCircle != balls[i].lastHalfPassed)
+                {
+                    if (balls[i].halfCircle == 1)
+                    {
+                        changeNote();
+                    }
+                    balls[i].lastHalfPassed = balls[i].halfCircle;
+                }
+            }
+        }
+
+
+        /*for (var i = 0; i < vehicles.length; i++)
+        {
+            vehicles[i].Seek(t);
+            vehicles[i].Update();
+            vehicles[i].Draw(ctx);
+
+            //console.log(vehicles[i].velocity.y);
+
+            if (playing)
+            {
+                if (Vector.DistanceSquared(vehicles[i].position,t) < 5)
+                {
+                    changeNote();
+                }
+        }
+        }*/
+    }
+
+    startPlaying = function()
+    {
+        if(!playing)
+        {
+            playing = true;
+
+            oscillator.frequency.value = Player.getFrequency(notes[index]);
+            oscillator.type = 'sine';
+            envelope.gain.value = 1;
+
+            oscillator.connect(envelope);
+            envelope.connect(context.destination);  
+
+            oscillator.start(context.currentTime);
+        }
+    }
+
+    draw = function()
+    {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        /*ctx.strokeStyle = "white";
+        ctx.beginPath();
+        ctx.moveTo(250,200);
+        ctx.lineTo(350,200);
+        ctx.stroke();*/
+    }
+
+    play = function(note)
+    {
+        frequency = Player.getFrequency(note);
+        Player.play(frequency, context);
+    }
+
+    changeNote = function()
+    {
+        index++;
+        if (index == notes.length)
+        {
+            index = 0;
+        }
+        var f = Player.getFrequency(notes[index]);
+        oscillator.frequency.value = f;
+        envelope.gain.exponentialRampToValueAtTime(0.001, context.currentTime + decayRate);
+        envelope.gain.exponentialRampToValueAtTime(0.9, context.currentTime + decayRate/5);
+        line.frequency = f;
+        line.Oscillate();
+    }
+
+    playFurElise = function()
+    {
+        play(notes[index]);
+        index++;
+        if (index == notes.length)
+        {
+            index = 0;
+        }
+    }
+
+  
+</script>
