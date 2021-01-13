@@ -6,7 +6,7 @@ class Ball
         this.centre = new Vector(cx,cy);
         this.r = Math.abs(r)
         this.theta = theta;
-        this.angularVel = 0.1 * vdir;
+        this.angularVel = 0.04 * vdir;
         if (theta < Math.PI / 2 || theta > 3 * Math.PI / 2)
         {
             this.halfCircle = 1;
@@ -16,6 +16,7 @@ class Ball
             this.halfCircle = -1
         }
         this.lastHalfPassed = 0;
+        this.lastLinePassed = -1;
     }
 
     Update()
@@ -32,6 +33,24 @@ class Ball
 
     Draw(ctx)
     {
+        var otherX = this.r * Math.cos(this.theta + Math.PI) + this.centre.x;
+        var otherY = this.r * Math.sin(this.theta + Math.PI) + this.centre.y;
+        var gradient = ctx.createLinearGradient(this.pos.x, this.pos.y, otherX, otherY);
+        gradient.addColorStop("0", "white");
+        gradient.addColorStop("1.0", "black");
+        ctx.strokeStyle = gradient;
+        ctx.beginPath();
+        if (this.angularVel > 0)
+        {
+            ctx.arc(this.centre.x,this.centre.y,this.r,this.theta-Math.PI,this.theta,false);
+        }
+        else{
+            ctx.arc(this.centre.x,this.centre.y,this.r,this.theta+Math.PI,this.theta,true);
+
+        }
+        ctx.stroke();
+
+
         ctx.fillStyle = "white";
         ctx.beginPath();
         ctx.arc(this.pos.x,this.pos.y,5,0,Math.PI*2,true);

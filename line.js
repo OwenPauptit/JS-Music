@@ -1,19 +1,26 @@
 class Line{
-    constructor(x1,y1,frequency)
+    constructor(x1,y1,frequency,islast=false)
     {
         this.centre = new Vector(x1,y1);
-        this.frequency
+        this.frequency = frequency;
         this.oscillation = 0;
         this.Amplitude = 0
         this.oscillationDir = 0
-        this.damping = 0.85;
+        this.damping = 0.9;
+        this.isLast = islast;
+        this.nextFrequency = -1;
     }
 
     Oscillate()
     {
-        this.oscillation = 3;
-        this.Amplitude = 3;
-        this.oscillationDir = -1.5;
+        this.oscillation = 5;
+        this.Amplitude = 5;
+        this.oscillationDir = -1;
+    }
+
+    ChangeFrequency(f)
+    {
+        this.nextFrequency = f;
     }
 
     Draw(ctx)
@@ -63,7 +70,16 @@ class Line{
         {
             this.Amplitude = 0;
             this.oscillation = 0;
-            this.oscillationDir = 0;
+            this.oscillationDir = 0;  
+        }
+        if (this.nextFrequency != -1)
+        {
+            this.frequency += (this.nextFrequency - this.frequency) / 5;
+            if (this.frequency < this.nextFrequency + 10 && this.frequency > this.nextFrequency - 10 )
+            {
+                this.frequency = this.nextFrequency;
+                this.nextFrequency = -1;
+            }
         }
     }
 }
