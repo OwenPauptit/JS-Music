@@ -18,11 +18,11 @@
     //first one: 
     const notes = ['A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'G3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'A#3', 'A3', 'G3', 'A#3', 'A#3', 'A#3', 'A3', 'A3', 'A3', 'G3', 'A#3', 'A#3', 'A#3', 'A3', 'A3', 'A3', 'G3', 'G3', 'G3', 'G3', 'A3', 'A3', 'A3', 'A3', 'A#3', 'A#3', 'A#3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'A#3', 'A3', 'G3', 'D3', 'C4', 'A#3', 'A3', 'A#3'];
     //Dance monkey: http://www.mintmusic.co.uk/2020/04/dance-monkey-tones-and-i.html
-    //const notes = ['F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3', 'A3', 'A3', 'G#3', 'F#3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3', 'G#3', 'A3', 'A3', 'G#3', 'F#3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3'];
+    //const notes = ['F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3',/*'','',*/ 'A3', 'A3', 'G#3', 'F#3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3', 'G#3', 'A3', 'A3', 'G#3', 'F#3', 'F#3', 'E3', 'F#3', 'E3', 'F#3', 'A3', 'G#3'];
 
     const oscillator = context.createOscillator();
     const envelope = context.createGain();
-    const decayRate = 5*Math.PI/48; // seconds
+    const decayRate = Math.PI/12; // seconds
 
 
     let playing = false;
@@ -47,9 +47,10 @@
         balls.push(new Ball(400,200,100,theta=0.01+Math.PI/2,vdir=1));
         balls.push(new Ball(400,200,100,theta=0.01+3*Math.PI/2,vdir=1));
 
-        lines.push(new Line(300,250,440));
-        lines.push(new Line(300,200,440));
-        lines.push(new Line(300,150,440,islast=true));
+        lines.push(new Line(300,255,440));
+        lines.push(new Line(300,220,440));
+        lines.push(new Line(300,180,440));
+        lines.push(new Line(300,145,440,islast=true));
 
 
         var loop = setInterval(gameLoop, 1000/40);
@@ -58,10 +59,6 @@
     gameLoop = function()
     {
         draw();
-        for (var i = 0; i < lines.length; i++)
-        {
-            lines[i].Draw(ctx);
-        }
         for (var i = 0; i < balls.length; i++)
         {
             balls[i].Update();
@@ -73,7 +70,7 @@
                 {
                     if (balls[i].pos.y < lines[j].centre.y+10 && balls[i].pos.y > lines[j].centre.y-10)
                     {
-                        console.log(balls[i].pos.x < lines[j].centre.x + 50,balls[i].pos.x > lines[j].centre - 50);
+                        //console.log(balls[i].pos.x < lines[j].centre.x + 50,balls[i].pos.x > lines[j].centre - 50);
                     
                         if 
                        ( balls[i].pos.x < lines[j].centre.x + 50 && balls[i].pos.x > lines[j].centre.x - 50 &&  balls[i].lastLinePassed != j)
@@ -85,6 +82,10 @@
                     }
                 }
             }
+        }
+        for (var i = 0; i < lines.length; i++)
+        {
+            lines[i].Draw(ctx);
         }
 
 
@@ -111,8 +112,9 @@
         if(!playing)
         {
             playing = true;
+            updateLines();
 
-            oscillator.frequency.value = Player.getFrequency(notes[index]);
+            oscillator.frequency.value = Player.getFrequency(notes[0]);
             oscillator.type = 'sine';
             envelope.gain.value = 1;
 
@@ -121,7 +123,6 @@
 
             oscillator.start(context.currentTime);
 
-            updateLines();
         }
     }
 
@@ -144,14 +145,18 @@
 
     changeNote = function(q)
     {
-        oscillator.frequency.value = lines[q].frequency;
-        envelope.gain.exponentialRampToValueAtTime(0.1, context.currentTime + decayRate);
-        envelope.gain.exponentialRampToValueAtTime(0.9, context.currentTime + decayRate/5);
-        lines[q].Oscillate();
+        //if (lines[q].frequency != Infinity)
+        {
+            //console.log(lines[q].frequency == Infinity);
+            oscillator.frequency.value = lines[q].frequency;
+            envelope.gain.exponentialRampToValueAtTime(0.1, context.currentTime + decayRate);
+            envelope.gain.exponentialRampToValueAtTime(0.7, context.currentTime + decayRate/8);
+            lines[q].Oscillate();
+        }
 
         if (lines[q].isLast)
         {
-            setTimeout(updateLines(),4*Math.PI/48);
+            setTimeout(updateLines(),Math.PI/15);
         }
     }
 

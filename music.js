@@ -24,6 +24,12 @@ class Player
     }
 
     static getFrequency(note) {
+
+        /*if (note.length == 0)
+        {
+            return Infinity;
+        }*/
+
         var notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'],
             octave,
             keyNumber;

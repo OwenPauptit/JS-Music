@@ -6,7 +6,7 @@ class Ball
         this.centre = new Vector(cx,cy);
         this.r = Math.abs(r)
         this.theta = theta;
-        this.angularVel = 0.04 * vdir;
+        this.angularVel = 0.03 * vdir;
         if (theta < Math.PI / 2 || theta > 3 * Math.PI / 2)
         {
             this.halfCircle = 1;
