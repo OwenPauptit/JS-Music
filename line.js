@@ -8,7 +8,7 @@ class Line{
         this.oscillationDir = 0
         this.damping = 0.9;
         this.isLast = islast;
-        this.nextFrequency = -1;
+        this.nextFrequency = 20000;
     }
 
     Oscillate()
@@ -37,7 +37,7 @@ class Line{
         //if (this.frequency != Infinity)
         {
             ctx.strokeStyle = "white";
-            var length = 1600000*2/*0*/ / (this.frequency * this.frequency);
+            var length = 1600000*10 / (this.frequency * this.frequency);
             var x1 = this.centre.x - length / 2;
             var x2 = this.centre.x + length / 2;
             var y = this.centre.y;
@@ -83,14 +83,11 @@ class Line{
                 this.oscillation = 0;
                 this.oscillationDir = 0;  
             }
-            if (this.nextFrequency != -1)
+            
+            this.frequency += (this.nextFrequency - this.frequency) / 2;
+            if (this.frequency < this.nextFrequency + 10 && this.frequency > this.nextFrequency - 10 )
             {
-                this.frequency += (this.nextFrequency - this.frequency) / 5;
-                if (this.frequency < this.nextFrequency + 10 && this.frequency > this.nextFrequency - 10 )
-                {
-                    this.frequency = this.nextFrequency;
-                    this.nextFrequency = -1;
-                }
+                this.frequency = this.nextFrequency;
             }
 
         }
